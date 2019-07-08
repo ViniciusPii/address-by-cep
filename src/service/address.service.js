@@ -2,9 +2,21 @@ const addressClient = require("../client/address.client")
 
 const addressService = () => {
 
-    const addressByCep = (cep) => {
+    const addressByCep = async (cep) => {
 
-        return addressClient.addressByCep(cep)
+        const body = await addressClient.addressByCep(cep)
+
+        const street = body.logradouro
+        const neighborhood = body.bairro
+        const city = body.localidade
+        const state = body.uf
+
+        return {
+            street,
+            neighborhood,
+            city,
+            state
+        }
 
     }
 
